@@ -300,36 +300,8 @@ img.popup-image {
 span.rating_band{
     margin-right: 10px;
 }
-.activity-feed .feed-item {
-    border-left: 2px solid #dee2e6;
-}
 .row.travellers_details {
     margin-bottom: 20px;
-}
-.border_budget {
-    border: 1px solid #7a6fbe3b;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-.border_budget_itinary {
-    border: 1px solid #7a6fbe3b;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-.add-day-section {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0px 0px 20px 0px;
-}
-.add-day-button {
-    font-size: 12px;
-    font-weight: 500;
-    background: #58db83;
-    border-radius: 5px;
-    padding: 3px 9px;
-    color: #fff;
 }
 .error-detail {
     color: red;
@@ -343,25 +315,17 @@ span.rating_band{
     color: #000;
     font-weight: bold;
 }
-.cms_switch{
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    background-color: #f6f6f6;
+    box-shadow: none;
+    border-radius: 0px;
 }
-.cms_switch .form-check-input{
-        padding: 0;
-    margin: 0;
-    left: 0;
-}
-button.btn.btn-primary.waves-effect.waves-light.frgt_btn {
-    width: 100%;
-}
-.quo_amount {
-    text-align: right;
-    font-size: 16px;
-}
-.payment_status {
-    width: fit-content;
-    font-size: 12px;
+
+.text-info {
+    color: #0ca7ec !important;
 }

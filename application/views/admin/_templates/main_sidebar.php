@@ -10,6 +10,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?=base_url('admin/startup');?>" class="waves-effect">
+                        <i class="fa fa-users"></i>
+                        <span>Startup List</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->
