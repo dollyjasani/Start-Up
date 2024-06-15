@@ -16,6 +16,12 @@
                         <span>Startup List</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?=base_url('admin/attendes');?>" class="waves-effect">
+                        <i class="fa fa-users"></i>
+                        <span>Attendes List</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

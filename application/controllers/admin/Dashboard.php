@@ -13,7 +13,8 @@ class Dashboard extends Admin_Controller
     public function index()
     {
         $this->data['title']      = 'Dashboard';
-        $this->data['users']    = $this->general_model->getCount('mstuser');
+        $this->data['startup']    = $this->general_model->getCount('startup_details');
+        $this->data['attende']    = $this->general_model->getCount('attende_details');
         $this->template->admin_render('admin/dashboard/index', $this->data);
     }
 }

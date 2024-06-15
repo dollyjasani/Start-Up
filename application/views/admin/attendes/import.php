@@ -7,7 +7,7 @@
 	                    <h4><?=$title?></h4>
 	                    <ol class="breadcrumb m-0">
 	                        <li class="breadcrumb-item"><a href="<?=base_url('admin/dashboard')?>">Dashboard</a></li>
-	                        <li class="breadcrumb-item"><a href="<?=base_url('admin/startup')?>">Startup List</a></li>
+	                        <li class="breadcrumb-item"><a href="<?=base_url('admin/attendes')?>">Startup List</a></li>
 	                        <li class="breadcrumb-item active"><?=$title?></li>
 	                    </ol>
 	                </div>
@@ -42,7 +42,7 @@
 	                    </div>
 						<div class="card-footer">
 		                    <button type="submit" class="btn btn-success"><?=$title?></button>
-		                    <a href="<?=base_url('admin/startup')?>" class="btn btn-danger">Cancel</a>
+		                    <a href="<?=base_url('admin/attendes')?>" class="btn btn-danger">Cancel</a>
 		                </div>
                     	<?php echo form_close(); ?>
 	                </div>
