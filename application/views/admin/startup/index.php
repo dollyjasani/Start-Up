@@ -38,7 +38,9 @@
                                         <tr>
                                             <th></th>
                                             <th>Name</th>
-                                            <th>Action</th>
+                                            <th>Description</th>
+                                            <th>Country</th>
+                                            <th>Sector</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,7 +58,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         oTable = $('#startup').dataTable({
-            "aaSorting": [[1, "desc"]],
+            "aaSorting": [[1, "asc"]],
             "serverSide": true,
             "fixedHeader": true,
             "responsive": false,
@@ -86,10 +88,9 @@
                 "bVisible": false,
             },
             null,
-            {
-                "bSortable": false,
-                "mRender": startup_action,
-            },
+            null,
+            null,
+            null,
             ],
             'fnRowCallback': function (nRow, aData, iDisplayIndex) {
                 var oSettings = oTable.fnSettings();

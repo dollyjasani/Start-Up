@@ -1,10 +1,5 @@
 <?php
-use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
 defined('BASEPATH') or exit('No direct script access allowed');
-require 'vendor/autoload.php';
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 class Startup extends Admin_Controller
 {
     public function __construct()
@@ -26,9 +21,9 @@ class Startup extends Admin_Controller
         $action = '$1';
         $this->load->library('datatables');
         $this->datatables
-            ->select('users.id, users.name')
-            ->from('users');
-        $this->datatables->add_column("Actions", $action, "users.id");
+            ->select('startup_details.id, startup_details.name, startup_details.description, startup_details.country, startup_details.sector')
+            ->from('startup_details');
+        $this->datatables->add_column("Actions", $action, "startup_details.id");
         echo $this->datatables->generate();
     }
 
@@ -37,9 +32,6 @@ class Startup extends Admin_Controller
         if (isset($_FILES["csv_file"])) {
             $this->load->library('upload');
             $sheet_data = array_map('str_getcsv', file($_FILES['csv_file']['tmp_name']));
-            echo "<pre>";
-            print_r($sheet_data);
-            exit;
             if (isset($sheet_data[0])) {
                 $headings = $sheet_data[0];
                 if ($sheet_data) {
@@ -47,20 +39,36 @@ class Startup extends Admin_Controller
                     $message = '';
                     $success = 0;   
                     foreach ($sheet_data as $key => $value) {
-                        if (!empty($value[0]) && $key > 0) {
-                            if ($product_type && $product_price) {
-                                $data = array(
-                                    'name' => trim($value[0]) ? trim($value[0]) : '',
-                                );
-                                if($prostartupdstartupucts){
-                                    $data['updated_on'] = time();
-                                    $this->general_model->update('users', array('id' => $startup->id), $data);
-                                }else{
-                                    $data['created_on'] = time();
-                                    $this->general_model->insert('users', $product);
+                        if (!empty($value[0]) && $key > 0 && !empty($value[8])) {
+                            $startup_details = $this->general_model->getOne('startup_details', array('web_scraper_start_url' => trim($value[1])));
+                            $data = array(
+                                'web_scraper_start_url' => trim($value[1]),
+                                'name' => trim($value[2]),
+                                'stage' => trim($value[3]) ? trim($value[3]) : '',
+                                'description' => trim($value[4]) ? trim($value[4]) : '',
+                                'country' => trim($value[5]) ? trim($value[5]) : '',
+                                'sector' => trim($value[6]) ? trim($value[6]) : '',
+                                'created_on' => time(),
+                            );
+                            $link = array(
+                                'link' => trim($value[8]),
+                                'link_href' => trim($value[9]),
+                                'created_on' => time(),
+                            );
+                            if ($startup_details) {
+                                $link['startup_id'] = $startup_details->id;
+                                $this->general_model->insert('social_details', $link);
+                            } else {
+                                // Otherwise, insert new startup details and then social details
+                                $startup_id = $this->general_model->insert('startup_details', $data);
+                                if ($startup_id) {
+                                    $link['startup_id'] = $startup_id;
+                                    $this->general_model->insert('social_details', $link);
+                                } else {
+                                    $error_message .= "Failed to insert startup details for " . $data['name'] . ". ";
                                 }
-                                $success++;
-                            }      
+                            }
+                            $success++;
                         }
                     }
                     if ($success == 0) {
